@@ -23,20 +23,26 @@ public:
 
         enum choice {
             TOP_BATTING_AVG = 1,
-            TOP_STRIKES_RATE_AVG,
+            TOP_STRIKES_RATE,
+            TOP_SIX_FOUR,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start) {
-            cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" << "\n\n3. Clear Screen" <<"\n\n4. Exit\n\n" << endl;
+            cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
+            << "\n\n3. Top SixFour Hitman" << "\n\n4. Clear Screen" <<"\n\n5. Exit\n\n" 
+            << endl;
             
             switch (view.inputChoice()) {
             case choice::TOP_BATTING_AVG:
                 findBattingAverage();
                 break;
-            case choice::TOP_STRIKES_RATE_AVG:
+            case choice::TOP_STRIKES_RATE:
                 findSrikesRateAverage();
+                break;
+            case choice::TOP_SIX_FOUR:
+                findSixFourHitman();
                 break;
             case choice::CLEAR_SCREEN:
                 system("cls");
@@ -58,13 +64,19 @@ public:
 
     void findBattingAverage() {
         string dataName = " Average";
-        this -> batsman = analyser.calcTopBattingAverage();
+        this -> batsman = analyser.findTopBattingAverage();
         displayData(batsman.getPlayerName(), batsman.getAverage(),dataName);
     }
 
     void findSrikesRateAverage() {
         string dataName = " StrikeRate";
-        this -> batsman = analyser.calcTopSrikeRateAverage();
+        this -> batsman = analyser.findTopSrikeRate();
+        displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
+    }
+
+    void findSixFourHitman() {
+        string dataName = " SixFour";
+        this -> batsman = analyser.findTopSixFourHitman();
         displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
     }
 
