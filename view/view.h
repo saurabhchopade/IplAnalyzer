@@ -3,19 +3,24 @@ using namespace std;
 class Display
 {
 public:
-    int inputChoice();
-    void displayTopBatsmanData(string, double,string);
+
+    int inputChoice() {
+        int choice;
+        cout << "Enter Your Choice: ";
+        cin >> choice ;
+        cout << endl << endl;
+        return choice;
+    }
+
+    void displayTopBatsmanData(string cricketerName, double battingAvg, string dataName) {
+        cout << "PlayerName : " << cricketerName;
+        cout << "\nTop Batting" << dataName <<   ": " << battingAvg << endl;
+    }
+
+    void displayPlayerData(string cricketerName, double dataPointOne
+                    ,double dataPointTwo, string dataName) {
+        cout << "PlayerName : " << cricketerName;
+        cout << "\n" << dataName <<   ": " << dataPointOne << 
+        " / " << dataPointTwo << endl;
+    }
 };
-
-int Display::inputChoice() {
-    int choice;
-    cout << "Enter Your Choice: ";
-    cin >> choice ;
-    cout << endl << endl;
-    return choice;
-}
-
-void Display::displayTopBatsmanData(string cricketerName, double battingAvg, string dataName) {
-    cout << "PlayerName : " << cricketerName;
-    cout << "\nTop Batting" << dataName <<   ": " << battingAvg << endl;
-}

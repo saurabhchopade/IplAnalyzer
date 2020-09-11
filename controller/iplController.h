@@ -25,15 +25,16 @@ public:
             TOP_BATTING_AVG = 1,
             TOP_STRIKES_RATE,
             TOP_SIX_FOUR,
-            SIX_FOUR_SR,
+            SR_WRT_SIX_FOUR,
+            BEST_AVG_STRIKERATE,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start) {
             cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
-            << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour" 
-            << "\n\n5. Clear Screen" <<"\n\n6. Exit\n\n" 
+            << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  << "\n\n5. Top Best Avg And Strike Rate" 
+            << "\n\n6. Clear Screen" <<"\n\n7. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
@@ -46,8 +47,11 @@ public:
             case choice::TOP_SIX_FOUR:
                 findSixFourHitman();
                 break;
-            case choice:: SIX_FOUR_SR:
+            case choice:: SR_WRT_SIX_FOUR:
                 findStrikeRateofSixFour();
+                break;
+            case choice:: BEST_AVG_STRIKERATE:
+                findBestAvgAndStrikeRate();
                 break;
             case choice::CLEAR_SCREEN:
                 system("cls");
@@ -80,15 +84,15 @@ public:
     }
 
     void findSixFourHitman() {
-        string dataName = " SixFour and Overall SR";
+        string dataName = "Six / Four";
         this -> batsman = analyser.findTopSixFourHitman();
-        displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
+        displayDataField(batsman.getPlayerName(),batsman.getSix(),batsman.getFour(),dataName);
     }
 
     void findStrikeRateofSixFour() {
         double six = 6;
         double four = 4;
-        string dataName = " SR WithRTO SixFour";
+        string dataName = "SR WithRTO SixFour";
         this -> batsman = analyser.findTopSrOfSixFour();
         double strikeRate = ( (batsman.getSix()*six) + (batsman.getFour()*four) ) 
                             /(batsman.getSix()+batsman.getFour()); 
@@ -96,7 +100,19 @@ public:
         displayData(batsman.getPlayerName(), strikeRate, dataName);
     }
 
+    void findBestAvgAndStrikeRate() {
+        string dataName = "Best Avg / Best StrikeRate";
+        this -> batsman = analyser.findBestAverageAndStrikeRate();
+        displayDataField(batsman.getPlayerName(),batsman.getAverage(),batsman.getStrikeRate(),dataName);
+    }
+
     void displayData(string playerName, double playerData, string dataName) {
         view.displayTopBatsmanData(playerName,playerData, dataName);
     }
+
+    void displayDataField(string playerName, double playerDataOne, double playerDataTwo, string dataName) {
+        view.displayPlayerData(playerName,playerDataOne,playerDataTwo, dataName);
+    }
+
+ 
 };
