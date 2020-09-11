@@ -1,14 +1,13 @@
 #include <iostream>
 #include  <stdlib.h>
 using namespace std;
-class IplController
-{
+class IplController {
     Display view;
     IplAnalyser analyser;
     Runs batsman;
 
 public:
-    IplController(){}
+    IplController() {}
 
     IplController(Display view, IplAnalyser analyser) {
         this -> view = view;
@@ -16,7 +15,7 @@ public:
     }
 
     void welcomeNote() {
-        cout << "IPL ANALYSER SYSTEM" << endl;
+        cout << "\n\nIPL ANALYSER SYSTEM" << endl;
     }
 
     void showOptions() {
@@ -24,16 +23,20 @@ public:
 
         enum choice {
             TOP_BATTING_AVG = 1,
+            TOP_STRIKES_RATE_AVG,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start) {
-            cout << "\n\n1. Find Top Batting Average" << "\n\n2. Clear Screen" <<"\n\n3. Exit\n\n" << endl;
-            switch (view.inputChoice())
-            {
+            cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" << "\n\n3. Clear Screen" <<"\n\n4. Exit\n\n" << endl;
+            
+            switch (view.inputChoice()) {
             case choice::TOP_BATTING_AVG:
                 findBattingAverage();
+                break;
+            case choice::TOP_STRIKES_RATE_AVG:
+                findSrikesRateAverage();
                 break;
             case choice::CLEAR_SCREEN:
                 system("cls");
@@ -42,27 +45,30 @@ public:
                 start = false; 
                 break;       
             default:
-                cout << "Enter Valid Choice..." << endl;
+                cout << "Enter Valid Choice" << endl;
                 break;
             } 
         }
         
     }
 
-    void getChoice()
-    {
+    void getChoice() {
         view.inputChoice();
     }
 
-    void findBattingAverage()
-    {
-        this -> batsman = analyser.findTopBattingAverage();
-        displayTopBattingAvg();
+    void findBattingAverage() {
+        string dataName = " Average";
+        this -> batsman = analyser.calcTopBattingAverage();
+        displayData(batsman.getPlayerName(), batsman.getAverage(),dataName);
     }
 
-    void displayTopBattingAvg()
-    {
-        view.displayTopBatsmanByAverage(batsman.getPlayerName(),
-             batsman.getAverage());
+    void findSrikesRateAverage() {
+        string dataName = " StrikeRate";
+        this -> batsman = analyser.calcTopSrikeRateAverage();
+        displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
+    }
+
+    void displayData(string playerName, double playerData, string dataName) {
+        view.displayTopBatsmanData(playerName,playerData, dataName);
     }
 };

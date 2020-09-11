@@ -7,8 +7,7 @@
 using namespace std;
 namespace csvlib
 {
-    vector<unordered_map<string, string>> csvToObj(string file_Path)
-    {
+    vector<unordered_map<string, string>> csvToObj(string file_Path) {
         fstream fin; 
         fin.open(file_Path, ios::in);
         
@@ -17,25 +16,20 @@ namespace csvlib
         vector<string> header; 
         int row_iterator = 0;
         
-        while (getline(fin, line)) 
-        {   
+        while (getline(fin, line)) {   
             stringstream s(line);
             unordered_map<string, string> csv_column_data;
 
-            if(row_iterator < 1)
-            {
-                while (getline(s, word, ',')) 
-                {
+            if(row_iterator < 1) {
+                while (getline(s, word, ',')) {
                     header.push_back(word);
                 }
             } 
 
-            if(row_iterator > 0)
-            {
+            if(row_iterator > 0) {
                 int column_iterator = 0;
                 
-                while (getline(s, word, ',')) 
-                {
+                while (getline(s, word, ',')) {
                     csv_column_data[header.at(column_iterator)] = word;
                     column_iterator++;
                 }

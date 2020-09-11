@@ -4,7 +4,7 @@ class Display
 {
 public:
     int inputChoice();
-    void displayTopBatsmanByAverage(string cricketer_name, double batting_avg);
+    void displayTopBatsmanData(string, double,string);
 };
 
 int Display::inputChoice() {
@@ -15,7 +15,7 @@ int Display::inputChoice() {
     return choice;
 }
 
-void Display::displayTopBatsmanByAverage(string cricketer_name, double batting_avg) {
-    cout << "PlayerName : " << cricketer_name << "\nTop Batting Average : "
-            << batting_avg << endl;
+void Display::displayTopBatsmanData(string cricketerName, double battingAvg, string dataName) {
+    cout << "PlayerName : " << cricketerName;
+    cout << "\nTop Batting" << dataName <<   ": " << battingAvg << endl;
 }

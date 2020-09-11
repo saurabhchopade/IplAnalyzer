@@ -2,8 +2,7 @@
 #include "../model/iplAnalyser.h"
 #include "../controller/iplController.h"
 
-int main()
-{
+int main() {
     Display view;
     IplAnalyser analyser;
     IplController controller(view, analyser);

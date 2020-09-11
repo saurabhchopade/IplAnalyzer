@@ -5,26 +5,22 @@
 using namespace std;
 class IplAnalyser
 {
-    string file_path = "../resources/MostRuns.csv";
-    vector<unordered_map<string, string>> csv_data;
+    string filePath = "../resources/MostRuns.csv";
+    vector<unordered_map<string, string>> csvData;
     vector<Runs> player_records;
 
 public:
-    IplAnalyser()
-    {
-        this -> csv_data = csvlib::csvToObj(file_path);
+    IplAnalyser() {
+        this -> csvData = csvlib::csvToObj(filePath);
         update_player_record();
     }
 
-    vector<Runs> get_player_record()
-    {
+    vector<Runs> get_player_record() {
         return player_records;
     }
 
-    void update_player_record()
-    {
-        for(unordered_map<string, string> itr : csv_data)
-        {
+    void update_player_record() {
+        for(unordered_map<string, string> itr : csvData) {
             Runs most_runs(itr.at("PLAYER"));
             most_runs.setMatch(stoi(itr.at("Mat")));
             most_runs.setInnings(stoi(itr.at("Inns")));
@@ -40,12 +36,20 @@ public:
         }
     }
 
-    Runs findTopBattingAverage()
-    {
+    Runs calcTopBattingAverage() {
         sort(player_records.begin(), player_records.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool
-            {
+           Runs &first_batsman, Runs &second_batsman) -> bool {
                 return (first_batsman.getAverage() < second_batsman.getAverage());
+            }
+        );
+        
+        return player_records[player_records.size() - 1];
+    }
+
+    Runs calcTopSrikeRateAverage() {
+        sort(player_records.begin(), player_records.end(),[] (
+           Runs &first_batsman, Runs &second_batsman) -> bool {
+                return (first_batsman.getStrikeRate() < second_batsman.getStrikeRate());
             }
         );
         
