@@ -46,7 +46,7 @@ public:
         return player_records[player_records.size() - 1];
     }
 
-    Runs findTopSrikeRate() {
+    Runs findTopStrikeRate() {
         sort(player_records.begin(), player_records.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return (first_batsman.getStrikeRate() < second_batsman.getStrikeRate());
@@ -76,11 +76,23 @@ public:
         return player_records[player_records.size() - 1];
     }
 
-    Runs findBestAverageAndStrikeRate() {
+    Runs findGreatAverageAndStrikeRate() {
         sort(player_records.begin(), player_records.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
-                return ( first_batsman.getAverage() < second_batsman.getAverage() 
-                && first_batsman.getStrikeRate() < second_batsman.getStrikeRate());
+                return ( first_batsman.getAverage() * first_batsman.getStrikeRate() 
+                < second_batsman.getAverage() * second_batsman.getStrikeRate() );
+            }
+        );
+        
+        return player_records[player_records.size() - 1];
+    }
+
+    Runs findMaxRunBestAvg() {
+        sort(player_records.begin(), player_records.end(),[] (
+           Runs &first_batsman, Runs &second_batsman) -> bool {
+            
+                return ( first_batsman.getRun()*first_batsman.getAverage() 
+                < second_batsman.getRun()* second_batsman.getAverage() );
             }
         );
         

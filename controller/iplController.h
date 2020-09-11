@@ -27,14 +27,16 @@ public:
             TOP_SIX_FOUR,
             SR_WRT_SIX_FOUR,
             BEST_AVG_STRIKERATE,
+            MAX_RUN_BEST_AVG,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start) {
             cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
-            << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  << "\n\n5. Top Best Avg And Strike Rate" 
-            << "\n\n6. Clear Screen" <<"\n\n7. Exit\n\n" 
+            << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  
+            << "\n\n5. Top Best Avg And Strike Rate"  << "\n\n6. Max Run / Best Avg"
+            << "\n\n7. Clear Screen" <<"\n\n8. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
@@ -52,6 +54,9 @@ public:
                 break;
             case choice:: BEST_AVG_STRIKERATE:
                 findBestAvgAndStrikeRate();
+                break;
+            case choice:: MAX_RUN_BEST_AVG:
+                findMaxRunAndBestAvg();
                 break;
             case choice::CLEAR_SCREEN:
                 system("cls");
@@ -79,7 +84,7 @@ public:
 
     void findSrikesRateAverage() {
         string dataName = " StrikeRate";
-        this -> batsman = analyser.findTopSrikeRate();
+        this -> batsman = analyser.findTopStrikeRate();
         displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
     }
 
@@ -102,8 +107,13 @@ public:
 
     void findBestAvgAndStrikeRate() {
         string dataName = "Best Avg / Best StrikeRate";
-        this -> batsman = analyser.findBestAverageAndStrikeRate();
+        this -> batsman = analyser.findGreatAverageAndStrikeRate();
         displayDataField(batsman.getPlayerName(),batsman.getAverage(),batsman.getStrikeRate(),dataName);
+    }
+    void findMaxRunAndBestAvg() {
+        string dataName = "MAx Run / Best Avg";
+        this -> batsman = analyser.findMaxRunBestAvg();
+        displayDataField(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
     }
 
     void displayData(string playerName, double playerData, string dataName) {
