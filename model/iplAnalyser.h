@@ -56,9 +56,18 @@ public:
         return player_records[player_records.size() - 1];
     }
 
-    
     Runs findTopSixFourHitman() {
        
+        sort(player_records.begin(), player_records.end(),[] (
+           Runs &first_batsman, Runs &second_batsman) -> bool {
+                return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));
+            }
+        );
+        return player_records[player_records.size() - 1];
+    }
+    
+    Runs findTopSrOfSixFour() {
+
         sort(player_records.begin(), player_records.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));

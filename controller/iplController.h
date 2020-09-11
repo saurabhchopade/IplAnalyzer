@@ -25,13 +25,15 @@ public:
             TOP_BATTING_AVG = 1,
             TOP_STRIKES_RATE,
             TOP_SIX_FOUR,
+            SIX_FOUR_SR,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start) {
             cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
-            << "\n\n3. Top SixFour Hitman" << "\n\n4. Clear Screen" <<"\n\n5. Exit\n\n" 
+            << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour" 
+            << "\n\n5. Clear Screen" <<"\n\n6. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
@@ -43,6 +45,9 @@ public:
                 break;
             case choice::TOP_SIX_FOUR:
                 findSixFourHitman();
+                break;
+            case choice:: SIX_FOUR_SR:
+                findStrikeRateofSixFour();
                 break;
             case choice::CLEAR_SCREEN:
                 system("cls");
@@ -75,9 +80,20 @@ public:
     }
 
     void findSixFourHitman() {
-        string dataName = " SixFour";
+        string dataName = " SixFour and Overall SR";
         this -> batsman = analyser.findTopSixFourHitman();
         displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
+    }
+
+    void findStrikeRateofSixFour() {
+        double six = 6;
+        double four = 4;
+        string dataName = " SR WithRTO SixFour";
+        this -> batsman = analyser.findTopSrOfSixFour();
+        double strikeRate = ( (batsman.getSix()*six) + (batsman.getFour()*four) ) 
+                            /(batsman.getSix()+batsman.getFour()); 
+
+        displayData(batsman.getPlayerName(), strikeRate, dataName);
     }
 
     void displayData(string playerName, double playerData, string dataName) {
