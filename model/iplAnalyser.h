@@ -179,5 +179,19 @@ public:
         
         return bowlerRecords[bowlerRecords.size() - 1];
     } 
+
+    Wicket findTopAvgWithSr() {
+        sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
+           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+                if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
+                    return ( first_batsman.getAverage() * first_batsman.getStrikeRate() 
+                    > second_batsman.getAverage() * second_batsman.getStrikeRate() );
+                }
+                return false;   
+            }
+        );
+        return bowlerRecords[bowlerRecords.size() - 1];
+    }
+
 };
 

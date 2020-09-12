@@ -34,6 +34,7 @@ public:
             BOWLING_STRIKERATE,
             BOWLING_ECONOMY,
             BOWL_SR_WITH_WKTS,
+            BESTBOWL_AVG_SR,
             CLEAR_SCREEN,
             EXIT
         };
@@ -44,7 +45,8 @@ public:
             << "\n\n5. Top Best Avg And Strike Rate"  << "\n\n6. Max Run / Best Avg"
             << "\n\n7. Top Bowling average" << "\n\n8. Bowling StrikeRate"  
             << "\n\n9. Bowler Economy Rate" << "\n\n10. Bowler Best SR with wkts"
-             << "\n\n11. Clear Screen" <<"\n\n12. Exit\n\n" 
+            << "\n\n11. Bowler Best SR with Avg"
+             << "\n\n12. Clear Screen" <<"\n\n13. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
@@ -77,6 +79,9 @@ public:
                     break;
                 case choice:: BOWL_SR_WITH_WKTS:
                     topBowlerStrikeRateWithWkts();
+                    break;
+                case choice:: BESTBOWL_AVG_SR:
+                    topBowlerBestAvgWithSr();
                     break;
                 case choice::CLEAR_SCREEN:
                     system("clear");
@@ -156,6 +161,12 @@ public:
     void topBowlerStrikeRateWithWkts() {
         string dataName = "Bowl StrikeRate WRT Wkts";
         this -> bowler = analyser.findSrWithWkts();
+        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
+    }
+
+    void topBowlerBestAvgWithSr() {
+        string dataName = "Bowl Avg WRT StrikeRate";
+        this -> bowler = analyser.findTopAvgWithSr();
         displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
