@@ -134,6 +134,18 @@ public:
         
         return bowlerRecords[bowlerRecords.size() - 1];
     }
+  
+    Wicket findBowlingStrikeRate() {
+        sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
+           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+            
+                return ( first_batsman.getStrikeRate() 
+                < second_batsman.getStrikeRate() );
+            }
+        );
+        
+        return bowlerRecords[bowlerRecords.size() - 1];
+    }
 
     
 };

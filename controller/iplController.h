@@ -31,6 +31,7 @@ public:
             BEST_AVG_STRIKERATE,
             MAX_RUN_BEST_AVG,
             BOWLING_AVERAGE,
+            BOWLING_STRIKERATE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -39,7 +40,8 @@ public:
             cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
             << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  
             << "\n\n5. Top Best Avg And Strike Rate"  << "\n\n6. Max Run / Best Avg"
-            << "\n\n7. Top Bowling average" << "\n\n8. Clear Screen" <<"\n\n8. Exit\n\n" 
+            << "\n\n7. Top Bowling average" << "\n\n8. Bowling StrikeRate" 
+            << "\n\n9. Clear Screen" <<"\n\n10. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
@@ -63,6 +65,9 @@ public:
                 break;
             case choice:: BOWLING_AVERAGE:
                 findMaxBowlingAvg();
+                break;
+            case choice:: BOWLING_STRIKERATE:
+                findMaxBowlingStrikeRate();
                 break;
             case choice::CLEAR_SCREEN:
                 system("clear");
@@ -126,6 +131,11 @@ public:
         string dataName = "Bowling Avg";
         this -> bowler = analyser.findBestBowlingAvg();
         displayData(bowler.getPlayerName(),bowler.getAverage(),dataName);
+    }
+    void  findMaxBowlingStrikeRate() {
+        string dataName = "Bowling StrikeRate";
+        this -> bowler = analyser.findBowlingStrikeRate();
+        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void displayData(string playerName, double playerData, string dataName) {
