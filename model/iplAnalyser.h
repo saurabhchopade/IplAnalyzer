@@ -79,7 +79,6 @@ public:
     }
 
     Runs findTopSixFourHitman() {
-       
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));
@@ -186,6 +185,19 @@ public:
                 if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
                     return ( first_batsman.getAverage() * first_batsman.getStrikeRate() 
                     > second_batsman.getAverage() * second_batsman.getStrikeRate() );
+                }
+                return false;   
+            }
+        );
+        return bowlerRecords[bowlerRecords.size() - 1];
+    }
+
+    Wicket findBowlerMaxWicketsWithAvg() {
+        sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
+           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+                if(first_batsman.getWickets() > 0 && second_batsman.getWickets() > 0 ) {     
+                    return ( first_batsman.getWickets() - first_batsman.getAverage() 
+                    < second_batsman.getWickets() - second_batsman.getAverage() );
                 }
                 return false;   
             }

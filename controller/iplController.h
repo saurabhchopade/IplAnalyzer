@@ -14,10 +14,7 @@ public:
     IplController(Display view, IplAnalyser analyser) {
         this -> view = view;
         this -> analyser = analyser;
-    }
-
-    void welcomeNote() {
-        cout << "\n\nIPL ANALYSER SYSTEM" << endl;
+        view.welcomeNote();
     }
 
     void showOptions() {
@@ -34,21 +31,15 @@ public:
             BOWLING_STRIKERATE,
             BOWLING_ECONOMY,
             BOWL_SR_WITH_WKTS,
-            BESTBOWL_AVG_SR,
+            BESTBOWL_AVG_WITH_SR,
+            BESTBOWL_MAXWKTS_WITH_AVG,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start) {
-            cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
-            << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  
-            << "\n\n5. Top Best Avg And Strike Rate"  << "\n\n6. Max Run / Best Avg"
-            << "\n\n7. Top Bowling average" << "\n\n8. Bowling StrikeRate"  
-            << "\n\n9. Bowler Economy Rate" << "\n\n10. Bowler Best SR with wkts"
-            << "\n\n11. Bowler Best SR with Avg"
-             << "\n\n12. Clear Screen" <<"\n\n13. Exit\n\n" 
-            << endl;
-            
+            view.options();
+
             switch (view.inputChoice()) {
                 case choice::TOP_BATTING_AVG:
                     findBattingAverage();
@@ -80,8 +71,11 @@ public:
                 case choice:: BOWL_SR_WITH_WKTS:
                     topBowlerStrikeRateWithWkts();
                     break;
-                case choice:: BESTBOWL_AVG_SR:
+                case choice:: BESTBOWL_AVG_WITH_SR:
                     topBowlerBestAvgWithSr();
+                    break;
+                case choice:: BESTBOWL_MAXWKTS_WITH_AVG:
+                    topBowlerMaxWktsWithAvg();
                     break;
                 case choice::CLEAR_SCREEN:
                     system("clear");
@@ -90,7 +84,7 @@ public:
                     start = false; 
                     break;       
                 default:
-                    cout << "Enter Valid Choice" << endl;
+                    view.validOptionMsg();
                     break;
             } 
         }
@@ -167,6 +161,12 @@ public:
     void topBowlerBestAvgWithSr() {
         string dataName = "Bowl Avg WRT StrikeRate";
         this -> bowler = analyser.findTopAvgWithSr();
+        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
+    }
+
+    void  topBowlerMaxWktsWithAvg() {
+        string dataName = "Max Wkts WT Avg";
+        this -> bowler = analyser.findBowlerMaxWicketsWithAvg();
         displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
