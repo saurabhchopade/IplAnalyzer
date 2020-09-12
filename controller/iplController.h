@@ -33,6 +33,7 @@ public:
             BOWLING_AVERAGE,
             BOWLING_STRIKERATE,
             BOWLING_ECONOMY,
+            BOWL_SR_WITH_WKTS,
             CLEAR_SCREEN,
             EXIT
         };
@@ -42,46 +43,50 @@ public:
             << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  
             << "\n\n5. Top Best Avg And Strike Rate"  << "\n\n6. Max Run / Best Avg"
             << "\n\n7. Top Bowling average" << "\n\n8. Bowling StrikeRate"  
-            << "\n\n9. Bowler Economy Rate"  << "\n\n10. Clear Screen" <<"\n\n11. Exit\n\n" 
+            << "\n\n9. Bowler Economy Rate" << "\n\n10. Bowler Best SR with wkts"
+             << "\n\n11. Clear Screen" <<"\n\n12. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
-            case choice::TOP_BATTING_AVG:
-                findBattingAverage();
-                break;
-            case choice::TOP_STRIKES_RATE:
-                findSrikesRateAverage();
-                break;
-            case choice::TOP_SIX_FOUR:
-                findSixFourHitman();
-                break;
-            case choice:: SR_WRT_SIX_FOUR:
-                findStrikeRateofSixFour();
-                break;
-            case choice:: BEST_AVG_STRIKERATE:
-                findBestAvgAndStrikeRate();
-                break;
-            case choice:: MAX_RUN_BEST_AVG:
-                findMaxRunAndBestAvg();
-                break;
-            case choice:: BOWLING_AVERAGE:
-                findMaxBowlingAvg();
-                break;
-            case choice:: BOWLING_STRIKERATE:
-                findMaxBowlingStrikeRate();
-                break;
-            case choice:: BOWLING_ECONOMY:
-                findBowlingEconomyRate();
-                break;
-            case choice::CLEAR_SCREEN:
-                system("clear");
-                break;
-            case choice::EXIT:
-                start = false; 
-                break;       
-            default:
-                cout << "Enter Valid Choice" << endl;
-                break;
+                case choice::TOP_BATTING_AVG:
+                    findBattingAverage();
+                    break;
+                case choice::TOP_STRIKES_RATE:
+                    findSrikesRateAverage();
+                    break;
+                case choice::TOP_SIX_FOUR:
+                    findSixFourHitman();
+                    break;
+                case choice:: SR_WRT_SIX_FOUR:
+                    findStrikeRateofSixFour();
+                    break;
+                case choice:: BEST_AVG_STRIKERATE:
+                    findBestAvgAndStrikeRate();
+                    break;
+                case choice:: MAX_RUN_BEST_AVG:
+                    findMaxRunAndBestAvg();
+                    break;
+                case choice:: BOWLING_AVERAGE:
+                    findMaxBowlingAvg();
+                    break;
+                case choice:: BOWLING_STRIKERATE:
+                    findMaxBowlingStrikeRate();
+                    break;
+                case choice:: BOWLING_ECONOMY:
+                    findBowlingEconomyRate();
+                    break;
+                case choice:: BOWL_SR_WITH_WKTS:
+                    topBowlerStrikeRateWithWkts();
+                    break;
+                case choice::CLEAR_SCREEN:
+                    system("clear");
+                    break;
+                case choice::EXIT:
+                    start = false; 
+                    break;       
+                default:
+                    cout << "Enter Valid Choice" << endl;
+                    break;
             } 
         }
         
@@ -141,10 +146,17 @@ public:
         this -> bowler = analyser.findBowlingStrikeRate();
         displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
+
     void  findBowlingEconomyRate() {
         string dataName = "Economy Rate";
         this -> bowler = analyser.findBowlingEconomyRate();
         displayData(bowler.getPlayerName(),bowler.getEconomy(),dataName);
+    }
+
+    void topBowlerStrikeRateWithWkts() {
+        string dataName = "Bowl StrikeRate WRT Wkts";
+        this -> bowler = analyser.findSrWithWkts();
+        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void displayData(string playerName, double playerData, string dataName) {

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <unordered_map>
-#include <variant>
 using namespace std;
 
 class Wicket

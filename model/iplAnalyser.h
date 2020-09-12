@@ -126,9 +126,11 @@ public:
     Wicket findBestBowlingAvg() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
            Wicket &first_batsman, Wicket &second_batsman) -> bool {
-            
-                return ( first_batsman.getAverage() 
-                < second_batsman.getAverage() );
+                if(first_batsman.getAverage() > 0 && second_batsman.getAverage() > 0 ) {     
+                    return ( first_batsman.getAverage() 
+                    > second_batsman.getAverage() );
+                }
+                return false;    
             }
         );
         
@@ -138,9 +140,12 @@ public:
     Wicket findBowlingStrikeRate() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
            Wicket &first_batsman, Wicket &second_batsman) -> bool {
-            
-                return ( first_batsman.getStrikeRate() 
-                < second_batsman.getStrikeRate() );
+
+                if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
+                    return ( first_batsman.getStrikeRate() 
+                    > second_batsman.getStrikeRate());
+                }
+               return false;
             }
         );
         
@@ -149,16 +154,30 @@ public:
 
     Wicket findBowlingEconomyRate() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-           Wicket &first_batsman, Wicket &second_batsman) -> bool {
-            
+            Wicket &first_batsman, Wicket &second_batsman) -> bool {
                 return ( first_batsman.getEconomy() 
-                > second_batsman.getEconomy() );
+                > second_batsman.getEconomy());   
             }
         );
         
         return bowlerRecords[bowlerRecords.size() - 1];
     }
 
-    
+    Wicket findSrWithWkts() {
+        sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
+           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+
+                if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
+                    return ( (first_batsman.getStrikeRate()- (first_batsman.getFourWkts()
+                    + first_batsman.getFiveWkts())) 
+                    > ( second_batsman.getStrikeRate() - ( second_batsman.getFiveWkts() 
+                    + second_batsman.getFourWkts()) ));
+                }
+               return false;
+            }
+        );
+        
+        return bowlerRecords[bowlerRecords.size() - 1];
+    } 
 };
 
