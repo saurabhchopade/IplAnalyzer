@@ -4,26 +4,28 @@
 using namespace std;
 class Runs 
 {    
-    string player, high_score;
+    string player, highScore;
     int match, innings, run, hundred, fifty, fours, six;
     double  avg, strikeRate;
 
 public:
+
     Runs(){};
-    Runs(string player_name) {
-        player = player_name;
+
+    Runs(string playerName) {
+        player = playerName;
     }
 
     string getPlayerName() {
         return player;
     }
 
-    void setHighScore(string high_score) {
-        this -> high_score = high_score;
+    void setHighScore(string highScore) {
+        this -> highScore = highScore;
     }
 
     string getHighScore() {
-        return high_score;
+        return highScore;
     }
 
     void setMatch(int match) {

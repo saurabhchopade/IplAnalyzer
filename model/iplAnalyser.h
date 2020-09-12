@@ -1,94 +1,116 @@
 #include <iostream>
 #include "../utility/csvReader.h"
 #include "iplRun.h"
+#include "iplWickets.h"
 #include <algorithm>
 using namespace std;
 class IplAnalyser
 {
-    string filePath = "../resources/MostRuns.csv";
-    vector<unordered_map<string, string>> csvData;
-    vector<Runs> player_records;
+    string batsmanFilePath = "../resources/MostRuns.csv";
+    string bowlerFilePath = "../resources/MostWkts.csv";
+    vector<unordered_map<string, string>> battingCsvData;
+    vector<unordered_map<string, string>> bowlingCsvData;
+    vector<Runs> batsmanRecords;
+    vector<Wicket> bowlerRecords;
 
 public:
     IplAnalyser() {
-        this -> csvData = csvlib::csvToObj(filePath);
-        update_player_record();
+        this -> battingCsvData = csvlib::csvToObj(batsmanFilePath);
+        this -> bowlingCsvData = csvlib::csvToObj(bowlerFilePath);
+        updateBatsmanRecord();
+        updateBowlerRecord();
     }
 
     vector<Runs> get_player_record() {
-        return player_records;
+        return batsmanRecords;
     }
 
-    void update_player_record() {
-        for(unordered_map<string, string> itr : csvData) {
-            Runs most_runs(itr.at("PLAYER"));
-            most_runs.setMatch(stoi(itr.at("Mat")));
-            most_runs.setInnings(stoi(itr.at("Inns")));
-            most_runs.setRun(stoi(itr.at("Runs")));
-            most_runs.setHighScore(itr.at("HS"));
-            most_runs.setAverage(stod(itr.at("Avg")));
-            most_runs.setFifty(stoi(itr.at("50")));
-            most_runs.setFours(stoi(itr.at("4s")));
-            most_runs.setHundered(stoi(itr.at("100")));
-            most_runs.setSix(stoi(itr.at("6s")));
-            most_runs.setStrikeRate(stod(itr.at("SR")));
-            player_records.push_back(most_runs);
+    void updateBatsmanRecord() {
+        for(unordered_map<string, string> itr : battingCsvData) {
+            Runs mostRuns(itr.at("PLAYER"));
+            mostRuns.setMatch(stoi(itr.at("Mat")));
+            mostRuns.setInnings(stoi(itr.at("Inns")));
+            mostRuns.setRun(stoi(itr.at("Runs")));
+            mostRuns.setHighScore(itr.at("HS"));
+            mostRuns.setAverage(stod(itr.at("Avg")));
+            mostRuns.setFifty(stoi(itr.at("50")));
+            mostRuns.setFours(stoi(itr.at("4s")));
+            mostRuns.setHundered(stoi(itr.at("100")));
+            mostRuns.setSix(stoi(itr.at("6s")));
+            mostRuns.setStrikeRate(stod(itr.at("SR")));
+            batsmanRecords.push_back(mostRuns);
+        }
+    }
+    void updateBowlerRecord() {
+        for(unordered_map<string, string> itr : bowlingCsvData) {
+            Wicket mostWicket(itr.at("PLAYER"));
+            mostWicket.setMatch(stoi(itr.at("Mat")));
+            mostWicket.setInnings(stoi(itr.at("Inns")));
+            mostWicket.setRun(stoi(itr.at("Runs")));
+            mostWicket.setOver(stoi(itr.at("Ov")));
+            mostWicket.setAverage(stod(itr.at("Avg")));
+            mostWicket.setWickets(stoi(itr.at("Wkts")));
+            mostWicket.setFoursWkts(stoi(itr.at("4w")));
+            mostWicket.setEconomy(stod(itr.at("Econ")));
+            mostWicket.setFiveWkts(stoi(itr.at("5w")));
+            mostWicket.setStrikeRate(stod(itr.at("SR")));
+            bowlerRecords.push_back(mostWicket);
         }
     }
 
     Runs findTopBattingAverage() {
-        sort(player_records.begin(), player_records.end(),[] (
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return (first_batsman.getAverage() < second_batsman.getAverage());
             }
         );
         
-        return player_records[player_records.size() - 1];
+        return batsmanRecords[batsmanRecords.size() - 1];
     }
 
     Runs findTopStrikeRate() {
-        sort(player_records.begin(), player_records.end(),[] (
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return (first_batsman.getStrikeRate() < second_batsman.getStrikeRate());
             }
         );
         
-        return player_records[player_records.size() - 1];
+        return batsmanRecords[batsmanRecords.size() - 1];
     }
 
     Runs findTopSixFourHitman() {
        
-        sort(player_records.begin(), player_records.end(),[] (
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));
             }
         );
-        return player_records[player_records.size() - 1];
+        return batsmanRecords[batsmanRecords.size() - 1];
     }
     
     Runs findTopSrOfSixFour() {
 
-        sort(player_records.begin(), player_records.end(),[] (
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));
             }
         );
-        return player_records[player_records.size() - 1];
+        return batsmanRecords[batsmanRecords.size() - 1];
     }
 
     Runs findGreatAverageAndStrikeRate() {
-        sort(player_records.begin(), player_records.end(),[] (
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
                 return ( first_batsman.getAverage() * first_batsman.getStrikeRate() 
                 < second_batsman.getAverage() * second_batsman.getStrikeRate() );
             }
         );
         
-        return player_records[player_records.size() - 1];
+        return batsmanRecords[batsmanRecords.size() - 1];
     }
 
     Runs findMaxRunBestAvg() {
-        sort(player_records.begin(), player_records.end(),[] (
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &first_batsman, Runs &second_batsman) -> bool {
             
                 return ( first_batsman.getRun()*first_batsman.getAverage() 
@@ -96,7 +118,21 @@ public:
             }
         );
         
-        return player_records[player_records.size() - 1];
+        return batsmanRecords[batsmanRecords.size() - 1];
+    }
+
+    //bowler
+
+    Wicket findBestBowlingAvg() {
+        sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
+           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+            
+                return ( first_batsman.getAverage() 
+                < second_batsman.getAverage() );
+            }
+        );
+        
+        return bowlerRecords[bowlerRecords.size() - 1];
     }
 
     

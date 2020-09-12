@@ -14,7 +14,7 @@ public:
 
     void displayTopBatsmanData(string cricketerName, double battingAvg, string dataName) {
         cout << "PlayerName : " << cricketerName;
-        cout << "\nTop Batting" << dataName <<   ": " << battingAvg << endl;
+        cout << "\n" << dataName <<   ": " << battingAvg << endl;
     }
 
     void displayPlayerData(string cricketerName, double dataPointOne

@@ -1,10 +1,12 @@
 #include <iostream>
 #include  <stdlib.h>
 using namespace std;
+
 class IplController {
     Display view;
     IplAnalyser analyser;
     Runs batsman;
+    Wicket bowler;
 
 public:
     IplController() {}
@@ -28,6 +30,7 @@ public:
             SR_WRT_SIX_FOUR,
             BEST_AVG_STRIKERATE,
             MAX_RUN_BEST_AVG,
+            BOWLING_AVERAGE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -36,7 +39,7 @@ public:
             cout << "\n\n1. Find Top Batting Average" << "\n\n2. Top Strike Rate Player" 
             << "\n\n3. Top SixFour Hitman" << "\n\n4. Top StrikeRate WRT SixFour"  
             << "\n\n5. Top Best Avg And Strike Rate"  << "\n\n6. Max Run / Best Avg"
-            << "\n\n7. Clear Screen" <<"\n\n8. Exit\n\n" 
+            << "\n\n7. Top Bowling average" << "\n\n8. Clear Screen" <<"\n\n8. Exit\n\n" 
             << endl;
             
             switch (view.inputChoice()) {
@@ -58,8 +61,11 @@ public:
             case choice:: MAX_RUN_BEST_AVG:
                 findMaxRunAndBestAvg();
                 break;
+            case choice:: BOWLING_AVERAGE:
+                findMaxBowlingAvg();
+                break;
             case choice::CLEAR_SCREEN:
-                system("cls");
+                system("clear");
                 break;
             case choice::EXIT:
                 start = false; 
@@ -116,6 +122,12 @@ public:
         displayDataField(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
     }
 
+    void  findMaxBowlingAvg() {
+        string dataName = "Bowling Avg";
+        this -> bowler = analyser.findBestBowlingAvg();
+        displayData(bowler.getPlayerName(),bowler.getAverage(),dataName);
+    }
+
     void displayData(string playerName, double playerData, string dataName) {
         view.displayTopBatsmanData(playerName,playerData, dataName);
     }
@@ -124,5 +136,4 @@ public:
         view.displayPlayerData(playerName,playerDataOne,playerDataTwo, dataName);
     }
 
- 
 };
