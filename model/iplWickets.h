@@ -69,12 +69,12 @@ public:
         return bbi;
     }
 
-    void setEconomy(int economy) {
+    void setEconomy(double economy) {
         this -> economy = economy;
     }
 
-    int getEconomy() {
-        return bbi;
+    double getEconomy() {
+        return economy;
     }
     
     void setFoursWkts(int fourWkts) {

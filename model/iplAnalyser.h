@@ -147,6 +147,18 @@ public:
         return bowlerRecords[bowlerRecords.size() - 1];
     }
 
+    Wicket findBowlingEconomyRate() {
+        sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
+           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+            
+                return ( first_batsman.getEconomy() 
+                > second_batsman.getEconomy() );
+            }
+        );
+        
+        return bowlerRecords[bowlerRecords.size() - 1];
+    }
+
     
 };
 
