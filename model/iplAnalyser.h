@@ -2,6 +2,7 @@
 #include "../utility/csvReader.h"
 #include "iplRun.h"
 #include "iplWickets.h"
+#include "iplRunWickets.h"
 #include <algorithm>
 using namespace std;
 class IplAnalyser
@@ -12,6 +13,7 @@ class IplAnalyser
     vector<unordered_map<string, string>> bowlingCsvData;
     vector<Runs> batsmanRecords;
     vector<Wicket> bowlerRecords;
+    vector<RunsWickets> allRounderRecords;
 
 public:
     IplAnalyser() {
@@ -19,10 +21,7 @@ public:
         this -> bowlingCsvData = csvlib::csvToObj(bowlerFilePath);
         updateBatsmanRecord();
         updateBowlerRecord();
-    }
-
-    vector<Runs> get_player_record() {
-        return batsmanRecords;
+        updateAllRounderRecord();
     }
 
     void updateBatsmanRecord() {
@@ -41,6 +40,7 @@ public:
             batsmanRecords.push_back(mostRuns);
         }
     }
+    
     void updateBowlerRecord() {
         for(unordered_map<string, string> itr : bowlingCsvData) {
             Wicket mostWicket(itr.at("PLAYER"));
@@ -56,6 +56,21 @@ public:
             mostWicket.setStrikeRate(stod(itr.at("SR")));
             bowlerRecords.push_back(mostWicket);
         }
+    }
+
+    void updateAllRounderRecord() {
+        for(unordered_map<string, string> batsman : battingCsvData) {
+          
+            for(unordered_map<string, string> bowler : bowlingCsvData) {
+              
+                if(batsman.at("PLAYER") == bowler.at("PLAYER")) {
+                    RunsWickets mostRunWicket(batsman.at("PLAYER"));
+                    mostRunWicket.setBattingAverage(stod(batsman.at("Avg")));
+                    mostRunWicket.setBowlingAverage(stod(bowler.at("Avg")));
+                    allRounderRecords.push_back(mostRunWicket);
+                }
+            }
+        }    
     }
 
     Runs findTopBattingAverage() {
@@ -120,7 +135,7 @@ public:
         return batsmanRecords[batsmanRecords.size() - 1];
     }
 
-    //bowler
+//bowler
 
     Wicket findBestBowlingAvg() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
@@ -197,12 +212,23 @@ public:
            Wicket &first_batsman, Wicket &second_batsman) -> bool {
                 if(first_batsman.getWickets() > 0 && second_batsman.getWickets() > 0 ) {     
                     return ( first_batsman.getWickets() - first_batsman.getAverage() 
-                    < second_batsman.getWickets() - second_batsman.getAverage() );
+                            < second_batsman.getWickets() - second_batsman.getAverage() );
                 }
                 return false;   
             }
         );
         return bowlerRecords[bowlerRecords.size() - 1];
+    }
+
+//Allrounder
+    RunsWickets findAllRounderWithAverage() {
+        sort(allRounderRecords.begin(), allRounderRecords.end(),[] (
+           RunsWickets &firstAllRounder, RunsWickets &secondAllRounder) -> bool {
+                    return ( firstAllRounder.getBattingAverage() * firstAllRounder.getBowlingAverage() 
+                    < secondAllRounder.getBattingAverage() * secondAllRounder.getBowlingAverage());
+            }
+        );
+        return allRounderRecords[allRounderRecords.size() - 1];
     }
 
 };

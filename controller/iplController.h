@@ -7,6 +7,7 @@ class IplController {
     IplAnalyser analyser;
     Runs batsman;
     Wicket bowler;
+    RunsWickets allRounder;
 
 public:
     IplController() {}
@@ -18,7 +19,7 @@ public:
     }
 
     void showOptions() {
-        bool start = true;
+        bool repeat = true;
 
         enum choice {
             TOP_BATTING_AVG = 1,
@@ -33,14 +34,15 @@ public:
             BOWL_SR_WITH_WKTS,
             BESTBOWL_AVG_WITH_SR,
             BESTBOWL_MAXWKTS_WITH_AVG,
-            CLEAR_SCREEN,
+            BEST_ALLROUNDER_AVG,
             EXIT
         };
 
-        while (start) {
+        while (repeat) {
             view.options();
-
-            switch (view.inputChoice()) {
+            int choice = view.inputChoice();
+            system("clear");
+            switch (choice) {
                 case choice::TOP_BATTING_AVG:
                     findBattingAverage();
                     break;
@@ -77,11 +79,11 @@ public:
                 case choice:: BESTBOWL_MAXWKTS_WITH_AVG:
                     topBowlerMaxWktsWithAvg();
                     break;
-                case choice::CLEAR_SCREEN:
-                    system("clear");
+                case choice:: BEST_ALLROUNDER_AVG:
+                    BestAllRounderWithAverage();
                     break;
                 case choice::EXIT:
-                    start = false; 
+                    repeat = false; 
                     break;       
                 default:
                     view.validOptionMsg();
@@ -96,13 +98,13 @@ public:
     }
 
     void findBattingAverage() {
-        string dataName = " Average";
+        string dataName = "Average";
         this -> batsman = analyser.findTopBattingAverage();
         view.displayData(batsman.getPlayerName(), batsman.getAverage(),dataName);
     }
 
     void findSrikesRateAverage() {
-        string dataName = " StrikeRate";
+        string dataName = "StrikeRate";
         this -> batsman = analyser.findTopStrikeRate();
         view.displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
     }
@@ -125,18 +127,18 @@ public:
     }
 
     void findBestAvgAndStrikeRate() {
-        string dataName = "Best Avg / Best StrikeRate";
+        string dataName = "Best Average / Best StrikeRate";
         this -> batsman = analyser.findGreatAverageAndStrikeRate();
         view.displayData(batsman.getPlayerName(),batsman.getAverage(),batsman.getStrikeRate(),dataName);
     }
     void findMaxRunAndBestAvg() {
-        string dataName = "MAx Run / Best Avg";
+        string dataName = "Max Run / Best Average";
         this -> batsman = analyser.findMaxRunBestAvg();
         view.displayData(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
     }
 
     void  findMaxBowlingAvg() {
-        string dataName = "Bowling Avg";
+        string dataName = "Bowling Average";
         this -> bowler = analyser.findBestBowlingAvg();
         view.displayData(bowler.getPlayerName(),bowler.getAverage(),dataName);
     }
@@ -153,21 +155,27 @@ public:
     }
 
     void topBowlerStrikeRateWithWkts() {
-        string dataName = "Bowl StrikeRate WRT Wkts";
+        string dataName = "Bowling StrikeRate With Wkts";
         this -> bowler = analyser.findSrWithWkts();
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void topBowlerBestAvgWithSr() {
-        string dataName = "Bowl Avg WRT StrikeRate";
+        string dataName = "Bowling Averageg With StrikeRate";
         this -> bowler = analyser.findTopAvgWithSr();
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void  topBowlerMaxWktsWithAvg() {
-        string dataName = "Max Wkts WT Avg";
+        string dataName = "Max Wkts With Average";
         this -> bowler = analyser.findBowlerMaxWicketsWithAvg();
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
-    C
+
+    void   BestAllRounderWithAverage() {
+        string dataName = "Batting Average / Bowling Average";
+        this -> allRounder = analyser.findAllRounderWithAverage();
+        view.displayData(allRounder.getPlayerName(),allRounder.getBattingAverage(),allRounder.getBowlingAverage(),dataName);
+    }
+
 };
