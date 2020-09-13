@@ -35,6 +35,7 @@ public:
             BESTBOWL_AVG_WITH_SR,
             BESTBOWL_MAXWKTS_WITH_AVG,
             BEST_ALLROUNDER_AVG,
+            ALLROUNDER_BY_WKTSANDRUNS,
             EXIT
         };
 
@@ -81,6 +82,9 @@ public:
                     break;
                 case choice:: BEST_ALLROUNDER_AVG:
                     BestAllRounderWithAverage();
+                    break;
+                case choice:: ALLROUNDER_BY_WKTSANDRUNS:
+                    BestAllRounderByWktsAndRun();
                     break;
                 case choice::EXIT:
                     repeat = false; 
@@ -176,6 +180,12 @@ public:
         string dataName = "Batting Average / Bowling Average";
         this -> allRounder = analyser.findAllRounderWithAverage();
         view.displayData(allRounder.getPlayerName(),allRounder.getBattingAverage(),allRounder.getBowlingAverage(),dataName);
+    }
+
+    void    BestAllRounderByWktsAndRun() {
+        string dataName = "Runs / Wickets";
+        this -> allRounder = analyser.findAllRounderByWktsAndRuns();
+        view.displayData(allRounder.getPlayerName(),allRounder.getRuns(),allRounder.getWickets(),dataName);
     }
 
 };

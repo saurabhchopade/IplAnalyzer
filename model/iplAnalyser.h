@@ -67,6 +67,10 @@ public:
                     RunsWickets mostRunWicket(batsman.at("PLAYER"));
                     mostRunWicket.setBattingAverage(stod(batsman.at("Avg")));
                     mostRunWicket.setBowlingAverage(stod(bowler.at("Avg")));
+                    mostRunWicket.setRuns(stoi(batsman.at("Runs")));
+                    mostRunWicket.setWickets(stoi(bowler.at("Wkts")));
+                    mostRunWicket.setHundred(stoi(batsman.at("100")));
+                    mostRunWicket.setFifty(stoi(batsman.at("50")));
                     allRounderRecords.push_back(mostRunWicket);
                 }
             }
@@ -226,6 +230,16 @@ public:
            RunsWickets &firstAllRounder, RunsWickets &secondAllRounder) -> bool {
                     return ( firstAllRounder.getBattingAverage() * firstAllRounder.getBowlingAverage() 
                          < secondAllRounder.getBattingAverage() * secondAllRounder.getBowlingAverage());
+            }
+        );
+        return allRounderRecords[allRounderRecords.size() - 1];
+    }
+
+    RunsWickets findAllRounderByWktsAndRuns() {
+        sort(allRounderRecords.begin(), allRounderRecords.end(),[] (
+           RunsWickets &firstAllRounder, RunsWickets &secondAllRounder) -> bool {
+                    return ( firstAllRounder.getWickets() * firstAllRounder.getRuns() 
+                         < secondAllRounder.getWickets() * secondAllRounder.getRuns());
             }
         );
         return allRounderRecords[allRounderRecords.size() - 1];
