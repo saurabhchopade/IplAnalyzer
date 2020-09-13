@@ -40,9 +40,9 @@ public:
 
         while (repeat) {
             view.options();
-            int choice = view.inputChoice();
+            int selectChoice = view.inputChoice();
             system("clear");
-            switch (choice) {
+            switch (selectChoice) {
                 case choice::TOP_BATTING_AVG:
                     findBattingAverage();
                     break;
@@ -156,13 +156,13 @@ public:
 
     void topBowlerStrikeRateWithWkts() {
         string dataName = "Bowling StrikeRate With Wkts";
-        this -> bowler = analyser.findSrWithWkts();
+        this -> bowler = analyser.findBowlerSrWithWkts();
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void topBowlerBestAvgWithSr() {
         string dataName = "Bowling Averageg With StrikeRate";
-        this -> bowler = analyser.findTopAvgWithSr();
+        this -> bowler = analyser.findTopBowlerAvgWithSr();
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 

@@ -176,7 +176,7 @@ public:
         return bowlerRecords[bowlerRecords.size() - 1];
     }
 
-    Wicket findSrWithWkts() {
+    Wicket findBowlerSrWithWkts() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
            Wicket &firstBowler, Wicket &secondBowler) -> bool {
 
@@ -192,7 +192,7 @@ public:
         return bowlerRecords[bowlerRecords.size() - 1];
     } 
 
-    Wicket findTopAvgWithSr() {
+    Wicket findTopBowlerAvgWithSr() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
            Wicket &firstBowler, Wicket &secondBowler) -> bool {
          
