@@ -98,19 +98,19 @@ public:
     void findBattingAverage() {
         string dataName = " Average";
         this -> batsman = analyser.findTopBattingAverage();
-        displayData(batsman.getPlayerName(), batsman.getAverage(),dataName);
+        view.displayData(batsman.getPlayerName(), batsman.getAverage(),dataName);
     }
 
     void findSrikesRateAverage() {
         string dataName = " StrikeRate";
         this -> batsman = analyser.findTopStrikeRate();
-        displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
+        view.displayData(batsman.getPlayerName(), batsman.getStrikeRate(), dataName);
     }
 
     void findSixFourHitman() {
         string dataName = "Six / Four";
         this -> batsman = analyser.findTopSixFourHitman();
-        displayDataField(batsman.getPlayerName(),batsman.getSix(),batsman.getFour(),dataName);
+        view.displayData(batsman.getPlayerName(), batsman.getSix(), batsman.getFour(),dataName);
     }
 
     void findStrikeRateofSixFour() {
@@ -121,61 +121,53 @@ public:
         double strikeRate = ( (batsman.getSix()*six) + (batsman.getFour()*four) ) 
                             /(batsman.getSix()+batsman.getFour()); 
 
-        displayData(batsman.getPlayerName(), strikeRate, dataName);
+        view.displayData(batsman.getPlayerName(), strikeRate, dataName);
     }
 
     void findBestAvgAndStrikeRate() {
         string dataName = "Best Avg / Best StrikeRate";
         this -> batsman = analyser.findGreatAverageAndStrikeRate();
-        displayDataField(batsman.getPlayerName(),batsman.getAverage(),batsman.getStrikeRate(),dataName);
+        view.displayData(batsman.getPlayerName(),batsman.getAverage(),batsman.getStrikeRate(),dataName);
     }
     void findMaxRunAndBestAvg() {
         string dataName = "MAx Run / Best Avg";
         this -> batsman = analyser.findMaxRunBestAvg();
-        displayDataField(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
+        view.displayData(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
     }
 
     void  findMaxBowlingAvg() {
         string dataName = "Bowling Avg";
         this -> bowler = analyser.findBestBowlingAvg();
-        displayData(bowler.getPlayerName(),bowler.getAverage(),dataName);
+        view.displayData(bowler.getPlayerName(),bowler.getAverage(),dataName);
     }
     void  findMaxBowlingStrikeRate() {
         string dataName = "Bowling StrikeRate";
         this -> bowler = analyser.findBowlingStrikeRate();
-        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
+        view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void  findBowlingEconomyRate() {
         string dataName = "Economy Rate";
         this -> bowler = analyser.findBowlingEconomyRate();
-        displayData(bowler.getPlayerName(),bowler.getEconomy(),dataName);
+        view.displayData(bowler.getPlayerName(),bowler.getEconomy(),dataName);
     }
 
     void topBowlerStrikeRateWithWkts() {
         string dataName = "Bowl StrikeRate WRT Wkts";
         this -> bowler = analyser.findSrWithWkts();
-        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
+        view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void topBowlerBestAvgWithSr() {
         string dataName = "Bowl Avg WRT StrikeRate";
         this -> bowler = analyser.findTopAvgWithSr();
-        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
+        view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
     void  topBowlerMaxWktsWithAvg() {
         string dataName = "Max Wkts WT Avg";
         this -> bowler = analyser.findBowlerMaxWicketsWithAvg();
-        displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
+        view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
-
-    void displayData(string playerName, double playerData, string dataName) {
-        view.displayTopBatsmanData(playerName,playerData, dataName);
-    }
-
-    void displayDataField(string playerName, double playerDataOne, double playerDataTwo, string dataName) {
-        view.displayPlayerData(playerName,playerDataOne,playerDataTwo, dataName);
-    }
-
+    C
 };
