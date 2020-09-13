@@ -139,10 +139,10 @@ public:
 
     Wicket findBestBowlingAvg() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-           Wicket &first_batsman, Wicket &second_batsman) -> bool {
-                if(first_batsman.getAverage() > 0 && second_batsman.getAverage() > 0 ) {     
-                    return ( first_batsman.getAverage() 
-                    > second_batsman.getAverage() );
+           Wicket &firstBowler, Wicket &secondBowler) -> bool {
+              
+                if(firstBowler.getAverage() > 0 && secondBowler.getAverage() > 0 ) {     
+                    return ( firstBowler.getAverage() > secondBowler.getAverage() );
                 }
                 return false;    
             }
@@ -153,11 +153,10 @@ public:
   
     Wicket findBowlingStrikeRate() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+           Wicket &firstBowler, Wicket &secondBowler) -> bool {
 
-                if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
-                    return ( first_batsman.getStrikeRate() 
-                    > second_batsman.getStrikeRate());
+                if(firstBowler.getStrikeRate() > 0 && secondBowler.getStrikeRate() > 0 ) {     
+                    return ( firstBowler.getStrikeRate() > secondBowler.getStrikeRate());
                 }
                return false;
             }
@@ -168,9 +167,9 @@ public:
 
     Wicket findBowlingEconomyRate() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-            Wicket &first_batsman, Wicket &second_batsman) -> bool {
-                return ( first_batsman.getEconomy() 
-                > second_batsman.getEconomy());   
+            Wicket &firstBowler, Wicket &secondBowler) -> bool {
+                return ( firstBowler.getEconomy() 
+                > secondBowler.getEconomy());   
             }
         );
         
@@ -179,13 +178,12 @@ public:
 
     Wicket findSrWithWkts() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-           Wicket &first_batsman, Wicket &second_batsman) -> bool {
+           Wicket &firstBowler, Wicket &secondBowler) -> bool {
 
-                if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
-                    return ( (first_batsman.getStrikeRate()- (first_batsman.getFourWkts()
-                    + first_batsman.getFiveWkts())) 
-                    > ( second_batsman.getStrikeRate() - ( second_batsman.getFiveWkts() 
-                    + second_batsman.getFourWkts()) ));
+                if(firstBowler.getStrikeRate() > 0 && secondBowler.getStrikeRate() > 0 ) {     
+                    return ( (firstBowler.getStrikeRate()- (firstBowler.getFourWkts()+ firstBowler.getFiveWkts())) 
+                             > ( secondBowler.getStrikeRate() - ( secondBowler.getFiveWkts() 
+                            + secondBowler.getFourWkts()) ));
                 }
                return false;
             }
@@ -196,10 +194,11 @@ public:
 
     Wicket findTopAvgWithSr() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-           Wicket &first_batsman, Wicket &second_batsman) -> bool {
-                if(first_batsman.getStrikeRate() > 0 && second_batsman.getStrikeRate() > 0 ) {     
-                    return ( first_batsman.getAverage() * first_batsman.getStrikeRate() 
-                    > second_batsman.getAverage() * second_batsman.getStrikeRate() );
+           Wicket &firstBowler, Wicket &secondBowler) -> bool {
+         
+                if(firstBowler.getStrikeRate() > 0 && secondBowler.getStrikeRate() > 0 ) {     
+                    return ( firstBowler.getAverage() * firstBowler.getStrikeRate() 
+                            > secondBowler.getAverage() * secondBowler.getStrikeRate() );
                 }
                 return false;   
             }
@@ -209,10 +208,11 @@ public:
 
     Wicket findBowlerMaxWicketsWithAvg() {
         sort(bowlerRecords.begin(), bowlerRecords.end(),[] (
-           Wicket &first_batsman, Wicket &second_batsman) -> bool {
-                if(first_batsman.getWickets() > 0 && second_batsman.getWickets() > 0 ) {     
-                    return ( first_batsman.getWickets() - first_batsman.getAverage() 
-                            < second_batsman.getWickets() - second_batsman.getAverage() );
+           Wicket &firstBowler, Wicket &secondBowler) -> bool {
+         
+                if(firstBowler.getWickets() > 0 && secondBowler.getWickets() > 0 ) {     
+                    return ( firstBowler.getWickets() - firstBowler.getAverage() 
+                        < secondBowler.getWickets() - secondBowler.getAverage() );
                 }
                 return false;   
             }
@@ -225,7 +225,7 @@ public:
         sort(allRounderRecords.begin(), allRounderRecords.end(),[] (
            RunsWickets &firstAllRounder, RunsWickets &secondAllRounder) -> bool {
                     return ( firstAllRounder.getBattingAverage() * firstAllRounder.getBowlingAverage() 
-                    < secondAllRounder.getBattingAverage() * secondAllRounder.getBowlingAverage());
+                         < secondAllRounder.getBattingAverage() * secondAllRounder.getBowlingAverage());
             }
         );
         return allRounderRecords[allRounderRecords.size() - 1];
