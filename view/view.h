@@ -5,29 +5,48 @@ class Display
 public:
 
     void welcomeNote() {
-        cout << "\n\n========================================================"<< endl;
-        cout << "==================  IPL ANALYSER SYSTEM  ===============" << endl;
+        cout << "\n|===========================================================|"<< endl;
+        cout << "|                    IPL ANALYSER SYSTEM                    |" << endl;
     }
 
     void options() {
-        cout << "========================================================"<<endl;
-        cout <<"\e[1m" << "\n\n1. Find Top Batting Average      :";
-        cout << "\n\n2. Top Strike Rate Player        :"; 
-        cout << "\n\n3. Top SixFour Hitman            :";
-        cout << "\n\n4. Top StrikeRate WRT SixFour    :";  
-        cout << "\n\n5. Top Best Avg And Strike Rate  :";
-        cout << "\n\n6. Max Run / Best Avg            :"; 
-        cout << "\n\n7. Top Bowling average           :";
-        cout << "\n\n8. Bowling StrikeRate            :";  
-        cout << "\n\n9. Bowler Economy Rate           :";
-        cout << "\n\n10. Bowler Best SR with wkts     :";
-        cout << "\n\n11. Bowler Best SR with Avg      :";
-        cout << "\n\n12. Bowler Max Wkts with Avg     :";
-        cout << "\n\n13. Best All-Rounder By Average  :";
-        cout << "\n\n14. AllRounder By Wkts and Runs  :";
-        cout << "\n\n15. Best Player Hundred and Avg  :";
-        cout <<"\n\n16.  Exit                        :";
-        cout <<"\n\n=========================================================" << "\e[0m";
+        cout << "|===========================================================|"<<endl;
+        cout << "|                                                           |";
+        cout << "\e[1m" << "\n|   1. Find Top Batting Average                             |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   2. Top Strike Rate Player                               |" << endl; 
+        cout << "|                                                           |";
+        cout << "\n|   3. Top SixFour Hitman                                   |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   4. Top StrikeRate WRT SixFour                           |" << endl;  
+        cout << "|                                                           |";
+        cout << "\n|   5. Top Best Avg And Strike Rate                         |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   6. Max Run / Best Avg                                   |" << endl; 
+        cout << "|                                                           |";
+        cout << "\n|   7. Top Bowling average                                  |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   8. Bowling StrikeRate                                   |" << endl;  
+        cout << "|                                                           |";
+        cout << "\n|   9. Bowler Economy Rate                                  |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   10. Bowler Best SR with wkts                            |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   11. Bowler Best SR with Avg                             |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   12. Bowler Max Wkts with Avg                            |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   13. Best All-Rounder By Average                         |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   14. AllRounder By Wkts and Runs                         |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   15. Best Player Hundred and Avg                         |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   16. Best Avg Without 100 & 50                           |" << endl;
+        cout << "|                                                           |";
+        cout << "\n|   17.  Exit                                               |" << endl;
+        cout << "|                                                           |";
+        cout << "\n=============================================================" << "\e[0m";
     }
 
     void validOptionMsg(){
@@ -43,13 +62,13 @@ public:
     }
 
     void displayData(string cricketerName, double battingAvg, string dataName) {
-        cout << "\n\n=======================  OUTPUT  =======================" << endl;
+        cout << "\n=======================  BEST PLAYER  ======================" << endl;
         cout << "PLAYER NAME : " << cricketerName;
         cout << "\n" << dataName <<   " :: " << battingAvg << endl << endl;
     }
 
     void displayData(string cricketerName, double dataPointOne, double dataPointTwo, string dataName) {
-        cout << "\n\n=======================  OUTPUT  =======================" << endl;
+        cout << "\n=======================  BEST PLAYER  ======================" << endl;
         cout << "PLAYER NAME : " << cricketerName;
         cout << "\n" << dataName <<   " :: " << dataPointOne << 
         " / " << dataPointTwo << endl << endl;

@@ -264,5 +264,20 @@ public:
         return batsmanRecords[batsmanRecords.size() - 1];
     }
 
+    Runs findBatsmanByAvg() {
+
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+
+               if(firstBatsman.getHundred() == 0  || secondBatsman.getHundred() == 0) {
+                    return ( firstBatsman.getAverage() < secondBatsman.getAverage());
+               }
+               return false;
+            }
+        );
+
+        return batsmanRecords[batsmanRecords.size() - 1];
+    }
+
 };
 

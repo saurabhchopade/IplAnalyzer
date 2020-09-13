@@ -37,6 +37,7 @@ public:
             BEST_ALLROUNDER_AVG,
             ALLROUNDER_BY_WKTSANDRUNS,
             BESTAVG_AND_MAX_HUNDRED,
+            ZERO_HUNDRED_AND_FIFTY_BEST_AVG,
             EXIT
         };
 
@@ -89,6 +90,9 @@ public:
                     break;
                 case choice:: BESTAVG_AND_MAX_HUNDRED:
                     playerByMaxHundredBestBattingAvg();
+                    break;
+                case choice:: ZERO_HUNDRED_AND_FIFTY_BEST_AVG:
+                    playerByZeroHundredFiftyBestBattingAvg();
                     break;
                 case choice::EXIT:
                     repeat = false; 
@@ -174,13 +178,13 @@ public:
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
-    void  topBowlerMaxWktsWithAvg() {
+    void topBowlerMaxWktsWithAvg() {
         string dataName = "Max Wkts With Average";
         this -> bowler = analyser.findBowlerMaxWicketsWithAvg();
         view.displayData(bowler.getPlayerName(),bowler.getStrikeRate(),dataName);
     }
 
-    void   BestAllRounderWithAverage() {
+    void BestAllRounderWithAverage() {
         string dataName = "Batting Average / Bowling Average";
         this -> allRounder = analyser.findAllRounderWithAverage();
         view.displayData(allRounder.getPlayerName(),allRounder.getBattingAverage(),allRounder.getBowlingAverage(),dataName);
@@ -196,6 +200,12 @@ public:
         string dataName = "Hundred / Average";
         this -> batsman = analyser.findBatsmanByHundredAndAvg();
         view.displayData(batsman.getPlayerName(),batsman.getHundred(),batsman.getAverage(),dataName);
+    }
+
+    void playerByZeroHundredFiftyBestBattingAvg() {
+        string dataName = "Without '100' & '50' Best Average";
+        this -> batsman = analyser.findBatsmanByAvg();
+        view.displayData(batsman.getPlayerName(),batsman.getAverage(),dataName);
     }
 
 };
