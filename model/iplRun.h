@@ -5,8 +5,8 @@ using namespace std;
 class Runs 
 {    
     string player, highScore;
-    int match, innings, run, hundred, fifty, fours, six;
-    double  avg, strikeRate;
+    int match, avg, innings, run, hundred, fifty, fours, six;
+    double   strikeRate;
 
 public:
 
@@ -52,11 +52,11 @@ public:
         return run;
     }
     
-    void setHundered(int hundered) {
+    void setHundered(int hundred) {
         this -> hundred = hundred;
     }
 
-    int getHundered() {
+    int getHundred() {
         return hundred;
     }
 
@@ -88,7 +88,7 @@ public:
         this -> avg = avg;
     }
 
-    double getAverage() {
+    int getAverage() {
         return avg;
     }
 

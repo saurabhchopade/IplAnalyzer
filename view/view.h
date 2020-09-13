@@ -45,13 +45,13 @@ public:
     void displayData(string cricketerName, double battingAvg, string dataName) {
         cout << "\n\n=======================  OUTPUT  =======================" << endl;
         cout << "PLAYER NAME : " << cricketerName;
-        cout << "\n" << dataName <<   ": " << battingAvg << endl << endl;
+        cout << "\n" << dataName <<   " :: " << battingAvg << endl << endl;
     }
 
     void displayData(string cricketerName, double dataPointOne, double dataPointTwo, string dataName) {
         cout << "\n\n=======================  OUTPUT  =======================" << endl;
         cout << "PLAYER NAME : " << cricketerName;
-        cout << "\n" << dataName <<   ": " << dataPointOne << 
+        cout << "\n" << dataName <<   " :: " << dataPointOne << 
         " / " << dataPointTwo << endl << endl;
     }
 };

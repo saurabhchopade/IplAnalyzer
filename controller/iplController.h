@@ -192,10 +192,10 @@ public:
         view.displayData(allRounder.getPlayerName(),allRounder.getRuns(),allRounder.getWickets(),dataName);
     }
 
-    void    playerByMaxHundredBestBattingAvg() {
+    void playerByMaxHundredBestBattingAvg() {
         string dataName = "Hundred / Average";
         this -> batsman = analyser.findBatsmanByHundredAndAvg();
-        view.displayData(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
+        view.displayData(batsman.getPlayerName(),batsman.getHundred(),batsman.getAverage(),dataName);
     }
 
 };

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "../utility/csvReader.h"
 #include "iplRun.h"
@@ -31,7 +32,7 @@ public:
             mostRuns.setInnings(stoi(itr.at("Inns")));
             mostRuns.setRun(stoi(itr.at("Runs")));
             mostRuns.setHighScore(itr.at("HS"));
-            mostRuns.setAverage(stod(itr.at("Avg")));
+            mostRuns.setAverage(stoi(itr.at("Avg")));
             mostRuns.setFifty(stoi(itr.at("50")));
             mostRuns.setFours(stoi(itr.at("4s")));
             mostRuns.setHundered(stoi(itr.at("100")));
@@ -79,8 +80,8 @@ public:
 
     Runs findTopBattingAverage() {
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool {
-                return (first_batsman.getAverage() < second_batsman.getAverage());
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+                return (firstBatsman.getAverage() < secondBatsman.getAverage());
             }
         );
         
@@ -89,8 +90,8 @@ public:
 
     Runs findTopStrikeRate() {
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool {
-                return (first_batsman.getStrikeRate() < second_batsman.getStrikeRate());
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+                return (firstBatsman.getStrikeRate() < secondBatsman.getStrikeRate());
             }
         );
         
@@ -99,8 +100,9 @@ public:
 
     Runs findTopSixFourHitman() {
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool {
-                return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+                return (((firstBatsman.getSix()*6) + (firstBatsman.getFour()*4)) 
+                        < ((secondBatsman.getSix()*6) + (secondBatsman.getFour()*4)));
             }
         );
         return batsmanRecords[batsmanRecords.size() - 1];
@@ -109,8 +111,9 @@ public:
     Runs findTopSrOfSixFour() {
 
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool {
-                return ( ((first_batsman.getSix()*6) + (first_batsman.getFour()*4)) < ((second_batsman.getSix()*6) + (second_batsman.getFour()*4)));
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+                return (((firstBatsman.getSix()*6) + (firstBatsman.getFour()*4)) 
+                        < ((secondBatsman.getSix()*6) + (secondBatsman.getFour()*4)));
             }
         );
         return batsmanRecords[batsmanRecords.size() - 1];
@@ -118,9 +121,9 @@ public:
 
     Runs findGreatAverageAndStrikeRate() {
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool {
-                return ( first_batsman.getAverage() * first_batsman.getStrikeRate() 
-                < second_batsman.getAverage() * second_batsman.getStrikeRate() );
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+                return (firstBatsman.getAverage() * firstBatsman.getStrikeRate() 
+                        < secondBatsman.getAverage() * secondBatsman.getStrikeRate());
             }
         );
         
@@ -129,10 +132,10 @@ public:
 
     Runs findMaxRunBestAvg() {
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
-           Runs &first_batsman, Runs &second_batsman) -> bool {
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
             
-                return ( first_batsman.getRun()*first_batsman.getAverage() 
-                < second_batsman.getRun()* second_batsman.getAverage() );
+                return (firstBatsman.getRun()*firstBatsman.getAverage() 
+                        < secondBatsman.getRun()* secondBatsman.getAverage());
             }
         );
         
@@ -146,7 +149,7 @@ public:
            Wicket &firstBowler, Wicket &secondBowler) -> bool {
               
                 if(firstBowler.getAverage() > 0 && secondBowler.getAverage() > 0 ) {     
-                    return ( firstBowler.getAverage() > secondBowler.getAverage() );
+                    return (firstBowler.getAverage() > secondBowler.getAverage());
                 }
                 return false;    
             }
@@ -186,8 +189,7 @@ public:
 
                 if(firstBowler.getStrikeRate() > 0 && secondBowler.getStrikeRate() > 0 ) {     
                     return ( (firstBowler.getStrikeRate()- (firstBowler.getFourWkts()+ firstBowler.getFiveWkts())) 
-                             > ( secondBowler.getStrikeRate() - ( secondBowler.getFiveWkts() 
-                            + secondBowler.getFourWkts()) ));
+                             > ( secondBowler.getStrikeRate() - ( secondBowler.getFiveWkts() + secondBowler.getFourWkts()) ));
                 }
                return false;
             }
@@ -247,12 +249,18 @@ public:
 
 
     Runs findBatsmanByHundredAndAvg() {
+
         sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
            Runs &firstBatsman, Runs &secondBatsman) -> bool {
-                    return ( firstBatsman.getHundered() * firstBatsman.getAverage() 
-                         < secondBatsman.getHundered() * secondBatsman.getAverage());
+
+               if(firstBatsman.getHundred() > 0  || secondBatsman.getHundred() > 0) {
+                    return ( firstBatsman.getHundred() * firstBatsman.getAverage() 
+                         < secondBatsman.getHundred() * secondBatsman.getAverage());
+               }
+               return false;
             }
         );
+
         return batsmanRecords[batsmanRecords.size() - 1];
     }
 
