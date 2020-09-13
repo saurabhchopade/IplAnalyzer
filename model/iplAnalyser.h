@@ -245,5 +245,16 @@ public:
         return allRounderRecords[allRounderRecords.size() - 1];
     }
 
+
+    Runs findBatsmanByHundredAndAvg() {
+        sort(batsmanRecords.begin(), batsmanRecords.end(),[] (
+           Runs &firstBatsman, Runs &secondBatsman) -> bool {
+                    return ( firstBatsman.getHundered() * firstBatsman.getAverage() 
+                         < secondBatsman.getHundered() * secondBatsman.getAverage());
+            }
+        );
+        return batsmanRecords[batsmanRecords.size() - 1];
+    }
+
 };
 

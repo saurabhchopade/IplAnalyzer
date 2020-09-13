@@ -36,6 +36,7 @@ public:
             BESTBOWL_MAXWKTS_WITH_AVG,
             BEST_ALLROUNDER_AVG,
             ALLROUNDER_BY_WKTSANDRUNS,
+            BESTAVG_AND_MAX_HUNDRED,
             EXIT
         };
 
@@ -85,6 +86,9 @@ public:
                     break;
                 case choice:: ALLROUNDER_BY_WKTSANDRUNS:
                     BestAllRounderByWktsAndRun();
+                    break;
+                case choice:: BESTAVG_AND_MAX_HUNDRED:
+                    playerByMaxHundredBestBattingAvg();
                     break;
                 case choice::EXIT:
                     repeat = false; 
@@ -186,6 +190,12 @@ public:
         string dataName = "Runs / Wickets";
         this -> allRounder = analyser.findAllRounderByWktsAndRuns();
         view.displayData(allRounder.getPlayerName(),allRounder.getRuns(),allRounder.getWickets(),dataName);
+    }
+
+    void    playerByMaxHundredBestBattingAvg() {
+        string dataName = "Hundred / Average";
+        this -> batsman = analyser.findBatsmanByHundredAndAvg();
+        view.displayData(batsman.getPlayerName(),batsman.getRun(),batsman.getAverage(),dataName);
     }
 
 };

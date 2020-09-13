@@ -24,8 +24,9 @@ public:
         cout << "\n\n11. Bowler Best SR with Avg      :";
         cout << "\n\n12. Bowler Max Wkts with Avg     :";
         cout << "\n\n13. Best All-Rounder By Average  :";
-        cout << "\n\n14. AllRounder By Wkts By Runs   :";
-        cout <<"\n\n15.  Exit                        :";
+        cout << "\n\n14. AllRounder By Wkts and Runs  :";
+        cout << "\n\n15. Best Player Hundred and Avg  :";
+        cout <<"\n\n16.  Exit                        :";
         cout <<"\n\n=========================================================" << "\e[0m";
     }
 
