@@ -8,6 +8,7 @@ public:
     string player;
     
     int match, innings, runs, wickets, fourWkts, fiveWkts, over;
+
     double  bbi, average, economy, strikeRate;
 
     Wicket(){};
@@ -48,7 +49,7 @@ public:
         this -> innings = innings;
     }
 
-    int get_innings() {
+    int getInnings() {
         return innings;
     }
 

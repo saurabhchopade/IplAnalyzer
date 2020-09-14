@@ -1,16 +1,17 @@
 #include <iostream>
 #include <unordered_map>
-#include <variant>
 using namespace std;
 class Runs 
 {    
     string player, highScore;
+
     int match, avg, innings, run, hundred, fifty, fours, six;
-    double   strikeRate;
+
+    double strikeRate;
 
 public:
 
-    Runs(){};
+    Runs() {};
 
     Runs(string playerName) {
         player = playerName;

@@ -43,7 +43,8 @@ public:
 
         while (repeat) {
             view.options();
-            int selectChoice = view.inputChoice();
+
+            int selectChoice = inputChoice();
             system("clear");
             switch (selectChoice) {
                 case choice::TOP_BATTING_AVG:
@@ -94,7 +95,7 @@ public:
                 case choice:: ZERO_HUNDRED_AND_FIFTY_BEST_AVG:
                     playerByZeroHundredFiftyBestBattingAvg();
                     break;
-                case choice::EXIT:
+                case choice:: EXIT:
                     repeat = false; 
                     break;       
                 default:
@@ -105,8 +106,11 @@ public:
         
     }
 
-    void getChoice() {
-        view.inputChoice();
+    int inputChoice() {
+        int choice;
+        view.displayOption();
+        cin >> choice ;
+        return choice;
     }
 
     void findBattingAverage() {
@@ -154,6 +158,7 @@ public:
         this -> bowler = analyser.findBestBowlingAvg();
         view.displayData(bowler.getPlayerName(),bowler.getAverage(),dataName);
     }
+
     void  findMaxBowlingStrikeRate() {
         string dataName = "Bowling StrikeRate";
         this -> bowler = analyser.findBowlingStrikeRate();
@@ -190,7 +195,7 @@ public:
         view.displayData(allRounder.getPlayerName(),allRounder.getBattingAverage(),allRounder.getBowlingAverage(),dataName);
     }
 
-    void    BestAllRounderByWktsAndRun() {
+    void BestAllRounderByWktsAndRun() {
         string dataName = "Runs / Wickets";
         this -> allRounder = analyser.findAllRounderByWktsAndRuns();
         view.displayData(allRounder.getPlayerName(),allRounder.getRuns(),allRounder.getWickets(),dataName);

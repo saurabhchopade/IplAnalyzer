@@ -51,14 +51,10 @@ public:
 
     void validOptionMsg(){
         cout << "\n\nEnter Valid Choice" << endl;
-
     }
-    int inputChoice() {
-        int choice;
+
+    void displayOption() {
         cout << "\n\nEnter Your Choice: ";
-        cin >> choice ;
-        cout << endl << endl;
-        return choice;
     }
 
     void displayData(string cricketerName, double battingAvg, string dataName) {
@@ -70,7 +66,6 @@ public:
     void displayData(string cricketerName, double dataPointOne, double dataPointTwo, string dataName) {
         cout << "\n=======================  BEST PLAYER  ======================" << endl;
         cout << "PLAYER NAME : " << cricketerName;
-        cout << "\n" << dataName <<   " :: " << dataPointOne << 
-        " / " << dataPointTwo << endl << endl;
+        cout << "\n" << dataName <<   " :: " << dataPointOne << " / " << dataPointTwo << endl << endl;
     }
 };

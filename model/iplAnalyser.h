@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include "../utility/csvReader.h"
 #include "iplRun.h"
@@ -18,43 +17,43 @@ class IplAnalyser
 
 public:
     IplAnalyser() {
-        this -> battingCsvData = csvlib::csvToObj(batsmanFilePath);
-        this -> bowlingCsvData = csvlib::csvToObj(bowlerFilePath);
+        this -> battingCsvData = csvlib:: csvToObj(batsmanFilePath);
+        this -> bowlingCsvData = csvlib:: csvToObj(bowlerFilePath);
         updateBatsmanRecord();
         updateBowlerRecord();
         updateAllRounderRecord();
     }
 
     void updateBatsmanRecord() {
-        for(unordered_map<string, string> itr : battingCsvData) {
-            Runs mostRuns(itr.at("PLAYER"));
-            mostRuns.setMatch(stoi(itr.at("Mat")));
-            mostRuns.setInnings(stoi(itr.at("Inns")));
-            mostRuns.setRun(stoi(itr.at("Runs")));
-            mostRuns.setHighScore(itr.at("HS"));
-            mostRuns.setAverage(stoi(itr.at("Avg")));
-            mostRuns.setFifty(stoi(itr.at("50")));
-            mostRuns.setFours(stoi(itr.at("4s")));
-            mostRuns.setHundered(stoi(itr.at("100")));
-            mostRuns.setSix(stoi(itr.at("6s")));
-            mostRuns.setStrikeRate(stod(itr.at("SR")));
+        for(unordered_map<string, string> player : battingCsvData) {
+            Runs mostRuns(player.at("PLAYER"));
+            mostRuns.setMatch(stoi(player.at("Mat")));
+            mostRuns.setInnings(stoi(player.at("Inns")));
+            mostRuns.setRun(stoi(player.at("Runs")));
+            mostRuns.setHighScore(player.at("HS"));
+            mostRuns.setAverage(stoi(player.at("Avg")));
+            mostRuns.setFifty(stoi(player.at("50")));
+            mostRuns.setFours(stoi(player.at("4s")));
+            mostRuns.setHundered(stoi(player.at("100")));
+            mostRuns.setSix(stoi(player.at("6s")));
+            mostRuns.setStrikeRate(stod(player.at("SR")));
             batsmanRecords.push_back(mostRuns);
         }
     }
     
     void updateBowlerRecord() {
-        for(unordered_map<string, string> itr : bowlingCsvData) {
-            Wicket mostWicket(itr.at("PLAYER"));
-            mostWicket.setMatch(stoi(itr.at("Mat")));
-            mostWicket.setInnings(stoi(itr.at("Inns")));
-            mostWicket.setRun(stoi(itr.at("Runs")));
-            mostWicket.setOver(stoi(itr.at("Ov")));
-            mostWicket.setAverage(stod(itr.at("Avg")));
-            mostWicket.setWickets(stoi(itr.at("Wkts")));
-            mostWicket.setFoursWkts(stoi(itr.at("4w")));
-            mostWicket.setEconomy(stod(itr.at("Econ")));
-            mostWicket.setFiveWkts(stoi(itr.at("5w")));
-            mostWicket.setStrikeRate(stod(itr.at("SR")));
+        for(unordered_map<string, string> player : bowlingCsvData) {
+            Wicket mostWicket(player.at("PLAYER"));
+            mostWicket.setMatch(stoi(player.at("Mat")));
+            mostWicket.setInnings(stoi(player.at("Inns")));
+            mostWicket.setRun(stoi(player.at("Runs")));
+            mostWicket.setOver(stoi(player.at("Ov")));
+            mostWicket.setAverage(stod(player.at("Avg")));
+            mostWicket.setWickets(stoi(player.at("Wkts")));
+            mostWicket.setFoursWkts(stoi(player.at("4w")));
+            mostWicket.setEconomy(stod(player.at("Econ")));
+            mostWicket.setFiveWkts(stoi(player.at("5w")));
+            mostWicket.setStrikeRate(stod(player.at("SR")));
             bowlerRecords.push_back(mostWicket);
         }
     }
